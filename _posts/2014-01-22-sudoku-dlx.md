@@ -2,7 +2,7 @@
 layout: post
 title: 使用DLX算法解数独
 datetime: 2014-01-22 13:47
-tags: cpp, algorithm
+tags: cpp,algorithm
 ---
    
 {{ page.title }}
