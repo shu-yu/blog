@@ -2,7 +2,7 @@
 layout: post
 title: 使用DLX算法解数独
 datetime: 2014-01-22 13:47
-tags: cpp,algorithm
+tags: cpp, algorithm
 ---
    
 {{ page.title }}
@@ -46,25 +46,61 @@ B->down->up = B
 <h5>精确覆盖问题</h5>
    
 如果有这样一个01矩阵：   
-0 1 0 1 0   
-1 1 0 0 1   
-1 0 0 1 0   
-1 0 1 0 1   
-1 0 0 0 0   
+0 0 1 0 1 1 0   
+1 0 0 1 0 0 1   
+0 1 1 0 0 1 0   
+1 0 0 1 0 0 0   
+0 1 0 0 0 0 1   
+0 0 0 1 1 0 1   
+
+现在需要从矩阵中抽取出部分行，使这些行构成一个新的矩阵，新矩阵必须满足每一列仅有一个1。上面这个矩阵的第1行和第4行可以构成一个新的矩阵：
+0 0 1 0 1 1 0   
+1 0 0 1 0 0 0   
+0 1 0 0 0 0 1   
+可以看到新矩阵的每一列只有一个1，因此这个新矩阵就是精确覆盖的一个解了（注意解并不是唯一的）。
    
-现在需要从矩阵中抽取出部分行，使这些行构成一个新的矩阵，新矩阵必须满足每一列仅有一个1。   
+解决精确覆盖问题的方法应该不少，比如暴力搜索就可以解决，但是时间效率方面可能不太理想。   
    
-这个问题就是精确覆盖问题的一种表述，解决问题的方法应该不少，比如暴力搜索就可以解决，但是时间效率方面可能不太理想。   
-   
-Knuth针对这个问题提出了一种X算法，解决的过程可以参考一下这篇文章：[跳跃的舞者，舞蹈链（Dancing Links）算法——求解精确覆盖问题](http://www.cnblogs.com/grenet/p/3145800.html)   
-   
+下面介绍一种被Knuth称为X算法的解法，解决的过程大概如下：  
+矩阵(1)：   
+0 0 1 0 1 1 0   
+1 0 0 1 0 0 1   
+0 1 1 0 0 1 0   
+1 0 0 1 0 0 0   
+0 1 0 0 0 0 1   
+0 0 0 1 1 0 1   
+1、假定选择第1行，加入解集中，从矩阵中删除，并找出本行元素为1的列，结果分别为第3列、第5列和第6列，将这3列从矩阵中删除   
+矩阵(2)：   
+1 0 1 1   
+0 1 0 0   
+1 0 1 0   
+0 1 0 1   
+0 0 1 1   
+2、查看余下的行中，第3列或第5列或第6列元素为1的行，结果分别为第3行和第6行，将这2行从矩阵中删除   
+矩阵(3)：   
+1 0 1 1   
+1 0 1 0   
+0 1 0 1   
+3、按照步骤1继续选择新的行，这里选择新矩阵的第1行（原矩阵的第2行），将其加入解集中，并从矩阵中删除该行和元素为1的列，再按照步骤2删除相关的行   
+矩阵(4)：   
+1 1   
+4、若剩下的矩阵只有一行，且元素全部是1，则选择该行加入解集中，当前解集中的行数就是所求的一个解。否则回溯到上一个矩阵，选择其他的行，继续求解过程。   
+5、如果回溯完所有的行之后仍无法找到解，说明该问题无解。   
+
+如果把上述的矩阵看成一个双向十字链表，每一个元素代表一个结点，那么上述过程的行和列的删除和恢复都会变成非常简单。对于删除行或列的操作，我们都可以利用“伪删除”。对于回溯，我们只需要把结点放回原来的位置即可。
+
+详细过程可以参考一下这篇文章：[跳跃的舞者，舞蹈链（Dancing Links）算法——求解精确覆盖问题](http://www.cnblogs.com/grenet/p/3145800.html)   
+
+
+<h5>代码</h5>   
+
 我用C++对DLX算法作了封装，并且在此基础上写了个解数独的类，代码如下：   
 + [Node.h](http://www.onlyan.org/files/sudoku_dlx/Node.h)结点类声明   
-+ [Node.cpp](http://www.onlyan.org/files/sudoku_dlx/Node.cpp) 结点类实现  
-+ [DLXSolver.h](http://www.onlyan.org/files/sudoku_dlx/DLXSolver.h) 舞蹈链类声明  
-+ [DLXSolver.cpp](http://www.onlyan.org/files/sudoku_dlx/DLXSolver.cpp) 舞蹈链类实现  
-+ [SudokuSolver.h](http://www.onlyan.org/files/sudoku_dlx/SudokuSolver.h) 解数独类声明  
-+ [SudokuSolver.cpp](http://www.onlyan.org/files/sudoku_dlx/SudokuSolver.cpp) 解数独类实现  
-+ [main.cpp](http://www.onlyan.org/files/sudoku_dlx/main.cpp) 主测试函数  
++ [Node.cpp](http://www.onlyan.org/files/sudoku_dlx/Node.cpp) 结点类实现   
++ [DLXSolver.h](http://www.onlyan.org/files/sudoku_dlx/DLXSolver.h) 舞蹈链类声明   
++ [DLXSolver.cpp](http://www.onlyan.org/files/sudoku_dlx/DLXSolver.cpp) 舞蹈链类实现   
++ [SudokuSolver.h](http://www.onlyan.org/files/sudoku_dlx/SudokuSolver.h) 解数独类声明   
++ [SudokuSolver.cpp](http://www.onlyan.org/files/sudoku_dlx/SudokuSolver.cpp) 解数独类实现   
++ [main.cpp](http://www.onlyan.org/files/sudoku_dlx/main.cpp) 主测试函数   
 
 
