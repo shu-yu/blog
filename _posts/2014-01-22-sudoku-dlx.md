@@ -1,4 +1,4 @@
----
+﻿---
 layout: post
 title: 使用DLX算法解数独
 datetime: 2014-01-22 13:47
@@ -8,7 +8,7 @@ tags: cpp, algorithm
 {{ page.title }}
 ================
 
-<h5>1.双向十字链表</h5>
+<h5>双向十字链表</h5>
    
 链表是一种很常见的数据结构，大学的时候学过单向链表、双向链表、循环链表等。所谓双向十字链表，就是在水平与垂直方向上同时存在双向循环链表，其中每个结点至少包含上下左右四个指针，分别指向上下左右四个方向的邻接结点。双向十字链表还有一个比较有艺术气息的名称：Dancing links舞蹈链。
    
@@ -42,9 +42,8 @@ B->right->left = B
 B->up->down = B   
 B->down->up = B   
    
-   
-      
-<h5>2.精确覆盖问题</h5>
+ 
+<h5>精确覆盖问题</h5>
    
 如果有这样一个01矩阵：   
 0 1 0 1 0   
@@ -60,12 +59,12 @@ B->down->up = B
 Knuth针对这个问题提出了一种X算法，解决的过程可以参考一下这篇文章：[跳跃的舞者，舞蹈链（Dancing Links）算法——求解精确覆盖问题](http://www.cnblogs.com/grenet/p/3145800.html)   
    
 我用C++对DLX算法作了封装，并且在此基础上写了个解数独的类，代码如下：   
-+ [Node.h](www.onlyan.org/files/sudoku_dlx/Node.h)结点类声明   
-+ [Node.cpp](./files/sudoku_dlx/Node.cpp) 结点类实现  
-+ [DLXSolver.h](./files/sudoku_dlx/DLXSolver.h) 舞蹈链类声明  
-+ [DLXSolver.cpp](./files/sudoku_dlx/DLXSolver.cpp) 舞蹈链类实现  
-+ [SudokuSolver.h](./files/sudoku_dlx/SudokuSolver.h) 解数独类声明  
-+ [SudokuSolver.cpp](./files/sudoku_dlx/SudokuSolver.cpp) 解数独类实现  
-+ [main.cpp](./files/sudoku_dlx/main.cpp) 主测试函数  
++ [Node.h](http://www.onlyan.org/files/sudoku_dlx/Node.h)结点类声明   
++ [Node.cpp](http://www.onlyan.org/files/sudoku_dlx/Node.cpp) 结点类实现  
++ [DLXSolver.h](http://www.onlyan.org/files/sudoku_dlx/DLXSolver.h) 舞蹈链类声明  
++ [DLXSolver.cpp](http://www.onlyan.org/files/sudoku_dlx/DLXSolver.cpp) 舞蹈链类实现  
++ [SudokuSolver.h](http://www.onlyan.org/files/sudoku_dlx/SudokuSolver.h) 解数独类声明  
++ [SudokuSolver.cpp](http://www.onlyan.org/files/sudoku_dlx/SudokuSolver.cpp) 解数独类实现  
++ [main.cpp](http://www.onlyan.org/files/sudoku_dlx/main.cpp) 主测试函数  
 
 
