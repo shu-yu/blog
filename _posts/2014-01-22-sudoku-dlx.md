@@ -104,7 +104,7 @@ B->down->up = B
 <h5>代码</h5>   
 
 我用C++对DLX算法作了封装，并且在此基础上写了个解数独的类，代码如下：   
-+ [Node.h](http://www.onlyan.org/files/sudoku_dlx/Node.h)结点类声明   
++ [Node.h](http://www.onlyan.org/files/sudoku_dlx/Node.h) 结点类声明   
 + [Node.cpp](http://www.onlyan.org/files/sudoku_dlx/Node.cpp) 结点类实现   
 + [DLXSolver.h](http://www.onlyan.org/files/sudoku_dlx/DLXSolver.h) 舞蹈链类声明   
 + [DLXSolver.cpp](http://www.onlyan.org/files/sudoku_dlx/DLXSolver.cpp) 舞蹈链类实现   
