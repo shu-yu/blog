@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 操作栈
+title: 操作栈的简单实现
 datetime: 2014-01-23 23:10
 tags: cpp, data structure
 ---
