@@ -51,7 +51,7 @@
         }));
         google.maps.event.addDomListener(markers[iterator], 'click', function() {
           map.setZoom(13);
-          map.setCenter(markers[iterator].getPosition);
+          map.setCenter(markers[iterator].getPosition());
         });
         iterator++;
       }
