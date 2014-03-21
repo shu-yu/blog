@@ -42,8 +42,6 @@
         drop();
       }
       
-      var curMarker;
-      var curPos;
       function addMarker() {
         markers.push(new google.maps.Marker({
           position: neighborhoods[iterator],
@@ -51,8 +49,8 @@
           draggable: false,
           animation: google.maps.Animation.DROP
         }));
-        curMarker = markers[iterator];
-        curPos = neighborhoods[iterator];
+        var curMarker = markers[iterator];
+        var curPos = neighborhoods[iterator];
         google.maps.event.addDomListener(curMarker, 'click', function() {
           map.setZoom(12);
           map.setCenter(curPos);
