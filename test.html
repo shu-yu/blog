@@ -22,6 +22,14 @@
       var iterator = 0;
       var map;
       
+      function drop() {
+        for (var i = 0; i < neighborhoods.length; ++i) {
+          setTimeout(function() {
+            addMarker();
+          }, i * 1200);
+        }
+      }
+      
       function initialize() {
         var mapOptions = {
           center: berlin,
@@ -31,14 +39,6 @@
             mapOptions);
             
         drop();
-      }
-      
-      function drop() {
-        for (var i = 0; i < neighborhoods.length; ++i) {
-          setTimeout(function() {
-            addMarker();
-          }, i * 1200);
-        }
       }
       
       function addMarker() {
