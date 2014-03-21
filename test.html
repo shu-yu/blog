@@ -42,6 +42,7 @@
         drop();
       }
       
+      var curMarker;
       function addMarker() {
         markers.push(new google.maps.Marker({
           position: neighborhoods[iterator],
@@ -49,9 +50,10 @@
           draggable: false,
           animation: google.maps.Animation.DROP
         }));
-        google.maps.event.addDomListener(markers[iterator], 'click', function() {
-          map.setZoom(10);
-          map.setCenter(markers[iterator].getPosition());
+        curMarker = markers[iterator];
+        google.maps.event.addDomListener(curMarker, 'click', function() {
+          map.setZoom(12);
+          map.setCenter(curMarker.getPosition());
         });
         iterator++;
       }
