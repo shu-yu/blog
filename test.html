@@ -11,18 +11,48 @@
       src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD7MuIU-_tMyR-pfsgKGMNiYyPTIKfS0nU&sensor=false">
     </script>
     <script type="text/javascript">
+      var berlin = new google.maps.LatLng(52.520816, 13.410186);
+      var neighborhoods = [
+        new google.maps.LatLng(52.511467, 13.447179),
+        new google.maps.LatLng(52.549061, 13.422975),
+        new google.maps.LatLng(52.497622, 13.396110),
+        new google.maps.LatLng(52.517683, 13.394393)
+      ];
+      var markers = [];
+      var iterator = 0;
+      var map;
+      
       function initialize() {
         var mapOptions = {
-          center: new google.maps.LatLng(-34.397, 150.644),
-          zoom: 8,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
+          center: berlin,
+          zoom: 13
         };
-        var map = new google.maps.Map(document.getElementById("map_canvas"),
+        map = new google.maps.Map(document.getElementById("map_canvas"),
             mapOptions);
       }
+      
+      function drop() {
+        for (var i = 0; i < neighborhoods.length; ++i) {
+          setTimeout(function() {
+            addMarker();
+          }, i * 1200);
+        }
+      }
+      
+      function addMarker() {
+        markers.push(new goole.maps.Marker({
+          position: neighborhoods[iterator],
+          map: map,
+          draggable: false,
+          animation: google.maps.Animation.DROP
+        }));
+        iterator++;
+      }
+      
+      google.maps.event.addDomListener(window, 'load', initialize);
     </script>
   </head>
-  <body onload="initialize()">
+  <body>
     <div id="map_canvas" style="width:100%; height:100%"></div>
   </body>
 </html>
