@@ -26,14 +26,14 @@
         for (var i = 0; i < neighborhoods.length; ++i) {
           setTimeout(function() {
             addMarker();
-          }, i * 1200);
+          }, i * 500);
         }
       }
       
       function initialize() {
         var mapOptions = {
           center: berlin,
-          zoom: 13
+          zoom: 8
         };
         map = new google.maps.Map(document.getElementById("map_canvas"),
             mapOptions);
