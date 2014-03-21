@@ -49,9 +49,9 @@
           draggable: false,
           animation: google.maps.Animation.DROP
         }));
-        google.maps.event.addDomListener(markers.getAt(iterator), 'click', function() {
+        google.maps.event.addDomListener(markers[iterator], 'click', function() {
           map.setZoom(13);
-          map.setCenter(markers.getAt(iterator).getPosition);
+          map.setCenter(markers[iterator].getPosition);
         });
         iterator++;
       }
