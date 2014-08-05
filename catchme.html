@@ -1,15 +1,19 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
 <input type="button" value="点我点我" id="btn"
-onmouseover="test(); return false;"
+onmouseover="overme(); return false;" 
+onclick="clickme(); return true;"
 style="width:60px; height:30px; font-size:10px; margin-left:100px; margin-top:100px;"  
 />
 
 <script type="text/javascript">
-function test() {
+function overme() {
     var btn = document.getElementById("btn");
     var top_val = Math.floor(Math.random() * 800 + 1);
     var left_val = Math.floor(Math.random() * 800 + 1);
     btn.style.marginTop = top_val + "px";
     btn.style.marginLeft = left_val + "px";
+}
+function clickme() {
+    window.location.href = "http://www.shujiu.com/wlzj/2/t6.jpg";
 }
 </script>
